@@ -26,7 +26,7 @@ struct ActionPrediction {
 
         // Convert the confidence to a percentage based string.
         let percent = confidence * 100
-        let formatString = percent >= 99.5 ? "%2.0f %%" : "%2.1f %%"
+        let formatString = percent >= 99.5 ? "%2.0f%%" : "%2.1f%%"
         return String(format: formatString, percent)
     }
 

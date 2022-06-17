@@ -239,17 +239,32 @@ extension VideoProcessingChain {
     /// - Tag: gatherWindow
     private func gatherWindow(previousWindow: [MLMultiArray?],
                               multiArray: MLMultiArray?) -> [MLMultiArray?] {
-        var currentWindow = previousWindow
+        
+        var currentWindow = [MLMultiArray?]()
+        if !finishedExercise {
+            currentWindow = previousWindow
+            if previousWindow.count == predictionWindowSize {
+                // Advance the sliding array window by stride elements.
+                currentWindow.removeFirst(windowStride)
+            }
+        } else {
+            finishedExercise = false
+            //print("YESS")
+        }
+        
+        //print(previousWindow)
 
         // If the previous window size is the target size, it
         // means sendWindowWhenReady() just published an array window.
-        if previousWindow.count == predictionWindowSize {
-            // Advance the sliding array window by stride elements.
-            currentWindow.removeFirst(windowStride)
-        }
+//        if previousWindow.count == predictionWindowSize {
+//            // Advance the sliding array window by stride elements.
+//            currentWindow.removeFirst(windowStride)
+//        }
 
         // Add the newest multiarray to the window.
         currentWindow.append(multiArray)
+        
+        //currentWindow.removeAll()
 
         // Publish the array window to the next subscriber.
         // The currentWindow becomes this method's next previousWindow when

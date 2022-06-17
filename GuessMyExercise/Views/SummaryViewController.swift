@@ -73,7 +73,7 @@ extension SummaryViewController: UITableViewDataSource {
 
             let action = sortedActions[indexPath.row]
             let totalFrames = frameCounts[action] ?? 0
-            let totalDuration = Double(totalFrames) / frameRate
+            let totalDuration = Double(totalFrames) /// frameRate
 
             summaryCell.totalDuration = totalDuration
             summaryCell.actionLabel.text = action
@@ -96,6 +96,6 @@ class SummaryTableViewCell: UITableViewCell {
     ///
     /// For example, the time label shows "1.7s" for a value of `1.66666666666`.
     var totalDuration: Double = 0 {
-        didSet { timeLabel.text = String(format: "%0.1fs", totalDuration) }
+        didSet { timeLabel.text = String(format: "%0.0f", totalDuration) }
     }
 }

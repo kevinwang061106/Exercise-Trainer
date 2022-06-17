@@ -63,7 +63,7 @@ class PerformanceReporter {
         frameCount = 0
         predictionCount = 0
 
-        print(report)
+        //print(report)
 
     }
 }

@@ -53,7 +53,7 @@ class VideoCapture: NSObject {
     }
 
     /// The camera orientation the app uses to configure the capture session.
-    private var orientation = AVCaptureVideoOrientation.portrait {
+    private var orientation = AVCaptureVideoOrientation.landscapeRight { //.portrait {
         didSet { createVideoFramePublisher() }
     }
 
@@ -95,28 +95,29 @@ class VideoCapture: NSObject {
     /// Adjusts the video orientation to match the device's orientation.
     func updateDeviceOrientation() {
         // Retrieve the device's orientation from UIKit.
-        let currentPhysicalOrientation = UIDevice.current.orientation
-
-        // Use the device's physical orientation to orient the camera.
-        switch currentPhysicalOrientation {
-
-        // Default to portrait if face up, face down, or unknown.
-        case .portrait, .faceUp, .faceDown, .unknown:
-            // Use portrait for "flat" orientations.
-            orientation = .portrait
-        case .portraitUpsideDown:
-            orientation = .portraitUpsideDown
-        case .landscapeLeft:
-            // UIKit's "left" is the equivalent to AVFoundation's "right."
-            orientation = .landscapeRight
-        case .landscapeRight:
-            // UIKit's "right" is the equivalent to AVFoundation's "left."
-            orientation = .landscapeLeft
-
-        // Use portrait as the default for any future, unknown cases.
-        @unknown default:
-            orientation = .portrait
-        }
+//        let currentPhysicalOrientation = UIDevice.current.orientation
+//
+//        // Use the device's physical orientation to orient the camera.
+//        switch currentPhysicalOrientation {
+//
+//        // Default to portrait if face up, face down, or unknown.
+//        case .portrait, .faceUp, .faceDown, .unknown:
+//            // Use portrait for "flat" orientations.
+//            orientation = .portrait
+//        case .portraitUpsideDown:
+//            orientation = .portraitUpsideDown
+//        case .landscapeLeft:
+//            // UIKit's "left" is the equivalent to AVFoundation's "right."
+//            orientation = .landscapeRight
+//        case .landscapeRight:
+//            // UIKit's "right" is the equivalent to AVFoundation's "left."
+//            orientation = .landscapeLeft
+//
+//        // Use portrait as the default for any future, unknown cases.
+//        @unknown default:
+//            orientation = .portrait
+//        }
+        orientation = .landscapeRight
     }
 
     private func enableCaptureSession() {
